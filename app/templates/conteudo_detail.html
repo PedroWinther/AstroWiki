@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ conteudo.titulo }}</title>
+  <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>{{ conteudo.titulo }}</h1>
+    </header>
+
+    <!-- Seção de Detalhes do Conteúdo -->
+    <section class="conteudo-detail">
+      <p>{{ conteudo.conteudo }}</p>
+    </section>
+    <a href="{% url 'homepage' %}">Voltar</a>
+
+    <!-- Seção de Comentários -->
+    <section class="comentarios">
+      <h2>Comentários</h2>
+      <ul>
+        {% for comentario in comentarios %}
+          <li>
+            <strong>{{ comentario.autor.apelido }}</strong>: {{ comentario.comentario }}
+            {% if request.user == comentario.autor or request.user.is_superuser %}
+              <a href="{% url 'excluir_comentario_conteudo' comentario.id %}">Excluir</a>
+            {% endif %}
+
+            <!-- Formulário para Responder a um Comentário -->
+            <form method="post" class="responder-form">
+              {% csrf_token %}
+              <input type="hidden" name="comentario_pai" value="{{ comentario.id }}">
+              <textarea name="comentario" rows="2" required placeholder="Responder"></textarea>
+              <button type="submit">Responder</button>
+            </form>
+
+            <!-- Exibir Respostas -->
+            {% for resposta in comentario.respostas.all %}
+              <div class="resposta">
+                <strong>{{ resposta.autor.apelido }}</strong>: {{ resposta.comentario }}
+                {% if request.user == resposta.autor or request.user.is_superuser %}
+                  <a href="{% url 'excluir_comentario_conteudo' resposta.id %}">Excluir</a>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </li>
+        {% empty %}
+          <p>Seja o primeiro a comentar!</p>
+        {% endfor %}
+      </ul>
+
+      <!-- Formulário para Adicionar Comentário -->
+      <form method="post">
+        {% csrf_token %}
+        <textarea name="comentario" rows="3" required placeholder="Adicionar um comentário..."></textarea>
+        <button type="submit">Comentar</button>
+      </form>
+    </section>
+  </div>
+</body>
+</html>

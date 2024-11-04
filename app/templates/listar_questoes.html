@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Questões</title>
+</head>
+<body>
+  <h1>Lista de Questões</h1>
+  <ul>
+    {% for questao in questoes %}
+      <li>
+        <a href="{% url 'questao_detail' questao.id %}">{{ questao.titulo }}</a>
+      </li>
+    {% empty %}
+      <p>Nenhuma questao encontrada.</p>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'homepage' %}">Voltar</a>
+</body>
+</html>

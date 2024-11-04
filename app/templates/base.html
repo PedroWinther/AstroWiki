@@ -1,0 +1,23 @@
+<main class="main-content">
+    <header class="header">
+      <div class="toggleSidebar" id="toggleSidebar">  
+        <input class="label-check" id="label-check" type="checkbox">
+          <label for="label-check" class="hamburger-label">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+          <label></label></label>
+      </div>
+      <form method="get" action="{% url 'buscar' %}">
+        <input type="text" name="q" placeholder="Pesquise alguma coisa..." value="{{ request.GET.q }}">
+      </form>
+      <nav class="top-menu">
+        <a href="{% url 'listar_conteudos' %}">Conteúdos</a>
+        <a href="{% url 'listar_modulos' %}">Módulos</a>
+        <a href="{% url 'listar_cursos' %}">Cursos</a>
+        <a href="#">Testes</a>
+      </nav>
+      <div class="avatar">
+        <img src="../static/avatar.png" alt="Avatar do usuário">
+      </div>
+    </header>

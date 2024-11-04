@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Módulos</title>
+  <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Lista de Módulos</h1>
+    </header>
+    <section class="module-list">
+      <ul>
+        {% for modulo in modulos %}
+          <li>
+            <a href="{% url 'modulo_detail' modulo.id %}">{{ modulo.titulo }}</a> 
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+    <a href="{% url 'homepage' %}">Voltar</a>
+  </div>
+</body>
+</html>

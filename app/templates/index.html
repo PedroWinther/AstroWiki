@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AstroWiki</title>
+  <link rel="stylesheet" href="../static/indexStyle.css">
+</head>
+<body>
+  <div class="container">
+    
+    <!-- Menu lateral -->
+    <aside class="sidebar collapsed" id="sidebar">
+      <nav class="menu">
+        <div class="sidebar-header">
+          <h2>AstroWiki</h2>
+        </div>
+        <ul>
+          {% if is_autor_or_admin %}
+          <li class="menu-item"><a href="{% url 'admin:index' %}">Painel Administrativo</a></li>
+          {% endif %}
+          <li class="menu-item"><a href="#">Configuração</a></li>
+          <li class="menu-item"><a href="#">Suporte</a></li>
+          <li class="menu-item"><a href="#">Sobre nós</a></li>
+        </ul>
+      </nav>
+      <form method="post" action="{% url 'logout' %}" >
+        {% csrf_token %}
+        <button type="submit" class="disconnect">Desconectar</button>
+      </form>
+    </aside>
+
+    <!-- Interface principal -->
+    <main class="main-content">
+      <header class="header">
+        <div class="toggleSidebar" id="toggleSidebar">  
+          <input class="label-check" id="label-check" type="checkbox">
+            <label for="label-check" class="hamburger-label">
+              <div class="line1"></div>
+              <div class="line2"></div>
+              <div class="line3"></div>
+            <label></label></label>
+        </div>
+        <form method="get" action="{% url 'buscar' %}">
+          <input type="text" name="q" placeholder="Pesquise alguma coisa..." value="{{ request.GET.q }}">
+        </form>
+        <nav class="top-menu">
+          <a href="{% url 'listar_conteudos' %}">Conteúdos</a>
+          <a href="{% url 'listar_modulos' %}">Módulos</a>
+          <a href="{% url 'listar_cursos' %}">Cursos</a>
+          <a href="#">Testes</a>
+        </nav>
+        <div class="avatar">
+          <img src="../static/avatar.png" alt="Avatar do usuário">
+        </div>
+      </header>
+
+      <!-- Seção Continue por onde parou -->
+      <section class="continue">
+        <h3>Continue por onde parou</h3>
+        <div class="cards">
+          {% for conteudo in continue_conteudos %}
+          <div class="card">
+            <a href="{% url 'conteudo_detail' conteudo.id %}">{{ conteudo.titulo }}</a>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- Seção Sugestões -->
+      <section class="suggestions">
+        <h3>Você pode se interessar</h3>
+        <div class="cards">
+          {% for conteudo in suggestion_conteudos %}
+          <div class="card">
+            <div class="card">
+              <a href="{% url 'conteudo_detail' conteudo.id %}">{{ conteudo.titulo }}</a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="../static/scripts.js"></script>
+</body>
+</html>

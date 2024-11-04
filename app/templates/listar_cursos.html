@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Cursos</title>
+  <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Lista de Cursos</h1>
+    </header>
+    <section class="course-list">
+      <ul>
+        {% for curso in cursos %}
+          <li>
+            <a href="{% url 'curso_detail' curso.id %}">{{ curso.titulo }}</a> 
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+    <a href="{% url 'homepage' %}">Voltar</a>
+  </div>
+</body>
+</html>

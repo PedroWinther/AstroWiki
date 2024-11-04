@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ curso.titulo }}</title>
+</head>
+<body>
+  <h1>{{ curso.titulo }}</h1>
+  <p>{{ curso.descricao }}</p>
+
+  <!-- Módulos associados ao curso -->
+  <h2>Módulos neste Curso</h2>
+  <ul>
+    {% for modulo in curso.modulos.all %}
+      <li>{{ modulo.titulo }}</li>
+    {% empty %}
+      <p>Nenhum módulo disponível neste curso.</p>
+    {% endfor %}
+  </ul>
+
+  <!-- Comentários -->
+  <h2>Comentários</h2>
+  <ul>
+    {% for comentario in comentarios %}
+      <li>
+        <strong>{{ comentario.autor.apelido }}</strong>: {{ comentario.comentario }}
+        {% if request.user == comentario.autor or request.user.is_superuser %}
+          <a href="{% url 'excluir_comentario_curso' comentario.id %}">Excluir</a>
+        {% endif %}
+
+        <!-- Formulário de resposta -->
+        <form method="post" style="margin-left: 20px;">
+          {% csrf_token %}
+          <input type="hidden" name="comentario_pai" value="{{ comentario.id }}">
+          <textarea name="comentario" rows="2" required placeholder="Responder"></textarea>
+          <button type="submit">Responder</button>
+        </form>
+
+        <!-- Respostas -->
+        {% for resposta in comentario.respostas.all %}
+          <div style="margin-left: 20px;">
+            <strong>{{ resposta.autor.apelido }}</strong>: {{ resposta.comentario }}
+            {% if request.user == resposta.autor or request.user.is_superuser %}
+              <a href="{% url 'excluir_comentario_curso' resposta.id %}">Excluir</a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </li>
+    {% empty %}
+      <p>Seja o primeiro a comentar!</p>
+    {% endfor %}
+  </ul>
+
+  <!-- Novo Comentário -->
+  <form method="post">
+    {% csrf_token %}
+    <textarea name="comentario" rows="3" required placeholder="Adicionar um comentário..."></textarea>
+    <button type="submit">Comentar</button>
+  </form>
+</body>
+</html>

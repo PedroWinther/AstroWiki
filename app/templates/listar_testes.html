@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Testes</title>
+</head>
+<body>
+  <h1>Lista de Testes</h1>
+  <ul>
+    {% for teste in testes %}
+      <li>
+        <a href="{% url 'teste_detail' teste.id %}">{{ teste.titulo }}</a>
+      </li>
+    {% empty %}
+      <p>Nenhum teste encontrado.</p>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'homepage' %}">Voltar</a>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Resultados da Pesquisa - AstroWiki</title>
+</head>
+<body>
+  <div class="container">
+    <h2>Resultados da pesquisa para: "{{ query }}"</h2>
+
+    <!-- Resultados para Conteúdos -->
+    <section>
+      <h3>Conteúdos</h3>
+      {% if resultados_conteudos %}
+        <ul>
+          {% for conteudo in resultados_conteudos %}
+            <li><a href="{% url 'conteudo_detail' conteudo.id %}">{{ conteudo.titulo }}</a></li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Nenhum conteúdo encontrado.</p>
+      {% endif %}
+    </section>
+
+    <!-- Resultados para Módulos -->
+    <section>
+      <h3>Módulos</h3>
+      {% if resultados_modulos %}
+        <ul>
+          {% for modulo in resultados_modulos %}
+            <li><a href="{% url 'modulo_detail' modulo.id %}">{{ modulo.titulo }}</a></li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Nenhum módulo encontrado.</p>
+      {% endif %}
+    </section>
+
+    <!-- Resultados para Cursos -->
+    <section>
+      <h3>Cursos</h3>
+      {% if resultados_cursos %}
+        <ul>
+          {% for curso in resultados_cursos %}
+            <li><a href="{% url 'curso_detail' curso.id %}">{{ curso.titulo }}</a></li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Nenhum curso encontrado.</p>
+      {% endif %}
+    </section>
+  </div>
+</body>
+</html>

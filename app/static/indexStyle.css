@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+    --color-background: #f0f0f0;
+    --color-sidebar-bg: #CFECF3;
+    --color-primary: white;
+    --color-secondary: #CFECF3;
+    --color-text: #333;
+    --color-button-bg: white;
+    --color-avatar-border: #ccc;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Libre Baskerville", serif;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: var(--color-background);
+  }
+  
+  .container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  /* Estilo da sidebar */
+  .sidebar {
+    width: 250px;
+    background-color: var(--color-sidebar-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    transition: width 0.3s;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+  }
+  
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    transition: width 0.3s ease;
+    overflow: hidden; 
+    font-size: 13px;
+  }
+
+  .sidebar.collapsed {
+    display: none;
+  }
+  
+  .menu {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .menu ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .menu-item {
+    background-color: var(--color-button-bg);
+    border: none;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 10px; 
+    transition: background-color 0.3s ease;
+  }
+  
+  .menu-item:not(:last-child) {
+    margin-bottom: 10px; 
+  }
+  
+  .menu-item:hover {
+    background-color: var(--color-secondary);
+  }
+  
+  .disconnect {
+    background-color: var(--color-primary);
+    border: none;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 10px; 
+    transition: background-color 0.3s ease;
+  }
+  
+  .disconnect:hover {
+    background-color: var(red);
+  }
+  
+  /* Interface principal */
+  .main-content {
+    flex-grow: 1;
+    background-color: var(--color-primary);
+    transition: margin-left 0.3s ease
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 13vh;
+    background-color: var(--color-sidebar-bg);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+  }
+  
+  
+  .header input {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid var(--color-secondary);
+  }
+  
+  .top-menu a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: var(--color-text);
+  }
+  
+  .avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--color-avatar-border);
+  }
+  
+  /* Estilo das seções de conteúdo */
+  section {
+    margin: 4vh 5vw 10vh 5vw;
+  }
+  
+  h3 {
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: var(--color-text);
+    margin-left: 5px;
+  }
+  
+  .cards {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .card {
+    background-color: var(--color-secondary);
+    width: 14vw;
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-text);
+    font-size: 16px;
+    border-radius: 10px; 
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 3px 0 rgba(2, 2, 2, 0.37)
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 0;
+      overflow: hidden;
+    }
+  
+    .main-content {
+      padding: 10px;
+    }
+  
+    .header input {
+      width: 200px;
+    }
+  
+    .cards {
+      flex-wrap: wrap;
+    }
+  
+    .card {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  
+/* From Uiverse.io by JkHuger */ 
+.toggleSidebar{
+  transform: scale(0.5) rotate(180deg);
+  margin-bottom: 10px;
+}
+
+.label-check {
+  display: none;
+}
+
+.hamburger-label {
+  width: 70px;
+  height: 58px;
+  display: block;
+  cursor: pointer;
+}
+
+.hamburger-label div {
+  width: 70px;
+  height: 6px;
+  background-color: #000000;
+  position: absolute;
+}
+
+.line1 {
+  transition: all .3s;
+}
+
+.line2 {
+  margin: 18px 0 0;
+  transition: 0.3s;
+}
+
+.line3 {
+  margin: 36px 0 0 0;
+  transition: 0.3s;
+}
+
+#label-check:checked + .hamburger-label .line1 {
+  transform: rotate(35deg) scaleX(.55) translate(39px, -4.5px);
+  border-radius: 50px 50px 50px 0;
+}
+
+#label-check:checked + .hamburger-label .line3 {
+  transform: rotate(-35deg) scaleX(.55) translate(39px, 4.5px);
+  border-radius: 0 50px 50px 50px;
+}
+
+#label-check:checked + .hamburger-label .line2 {
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  width: 45px;
+}

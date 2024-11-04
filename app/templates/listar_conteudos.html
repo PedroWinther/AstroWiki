@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Conteúdos</title>
+</head>
+<body>
+  <h1>Lista de Conteúdos</h1>
+  <ul>
+    {% for conteudo in conteudos %}
+      <li>
+        <a href="{% url 'conteudo_detail' conteudo.id %}">{{ conteudo.titulo }}</a>
+      </li>
+    {% empty %}
+      <p>Nenhum conteúdo encontrado.</p>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'homepage' %}">Voltar</a>
+</body>
+</html>
